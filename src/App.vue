@@ -3,6 +3,7 @@
     <Title/>
     <SignIn />
     <GameNav />
+    <Timer/>
 
   </div>
 </template>
@@ -12,14 +13,22 @@
 import SignIn from './components/SignIn.vue'
 import Title from './components/Title.vue'
 import GameNav from './components/GameNav.vue'
+import Timer from './components/Timer.vue'
+
 
 export default {
   name: 'App',
+  data(){
+    return{
+      gameActive:false
+    }
+  },
   components: {
     SignIn,
     Title,
     GameNav,
-  }
+    Timer,
+  },
 }
 </script>
 
