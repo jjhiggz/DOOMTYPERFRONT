@@ -1,5 +1,8 @@
 <template>
-  <div class="nes-container is-centered">
+  <div
+    class="nes-container is-centered"
+    v-if="signInRendered"
+  >
     <p class="title black-title-background">Please enter your information</p>
     <form class="nes-field is-inline">
       <label for="name_field">Your username</label>
@@ -48,7 +51,8 @@ import { required, maxLength } from 'vuelidate/lib/validators';
 export default {
   name: 'SignIn',
   props: {
-    msg: String
+    msg: String,
+    signInRendered:Boolean,
   },
   validations: {
     userInput: {required, maxLength: maxLength(10) },
@@ -114,9 +118,6 @@ export default {
     display:flex;
     justify-content:space-around;
     padding-left:100px;
-  }
-  .button-spreader p {
-
   }
   .green-when-button-hoverl{
     color:green;

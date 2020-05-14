@@ -1,5 +1,8 @@
 <template>
-  <div class="nav-bar">
+  <div
+    class="nav-bar"
+    v-if='gameNavRendered'
+  >
     <p class="navbar-header">Welcome {name} select an option</p>
     <ul class="nes-lists" > 
       <li 
@@ -40,6 +43,9 @@
 
 <script>
 export default {
+  props: {
+    gameNavRendered:Boolean,
+  },
   data: function(){
     return {
     selectedItem: '',

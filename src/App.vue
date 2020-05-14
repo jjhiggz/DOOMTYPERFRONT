@@ -1,10 +1,11 @@
 <template>
   <div id="app" class='nes-container nav-brand is-centered' >
-    <Title/>
-    <SignIn />
-    <GameNav />
-    <Timer/>
-
+    <Title :titleRendered="titleRendered"/>
+    <SignIn :signInRendered="signInRendered"/>
+    <GameNav :gameNavRendered="gameNavRendered"/>
+    <GameChoices  :gameChoicesRendered="gameChoicesRendered"/>
+    <Timer :timerRendered="timerRendered"/>
+    <Game :gameRendered="gameRendered" />
   </div>
 </template>
 
@@ -15,12 +16,25 @@ import Title from './components/Title.vue'
 import GameNav from './components/GameNav.vue'
 import Timer from './components/Timer.vue'
 
+import GameChoices from './menuOptions/GameChoices.vue'
+
+import Game from './gameComponents/Game.vue'
+
+
 
 export default {
   name: 'App',
   data(){
     return{
-      gameActive:false
+      titleRendered:true,
+      signInRendered:false,
+      gameNavRendered:true,
+      timerRendered:false,
+      gameChoicesRendered:false,
+      gameRendered:true,
+      leaderBoardRendered:true,
+      statsRendered:true,
+      gameActive:false,
     }
   },
   components: {
@@ -28,6 +42,8 @@ export default {
     Title,
     GameNav,
     Timer,
+    GameChoices,
+    Game,
   },
 }
 </script>
@@ -45,5 +61,8 @@ font-size: 100px;
 }
 SignIn{
   display: none;
+}
+.hide{
+  display:none;
 }
 </style>

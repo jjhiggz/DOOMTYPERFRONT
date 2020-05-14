@@ -1,5 +1,5 @@
 <template>
-    <div class = "tbd">
+    <div class = "tbd" v-if="timerRendered">
       <div
         class="property nes-container"
       >
@@ -15,6 +15,9 @@
 
 export default {
   name:'Timer',
+    props: {
+    timerRendered: Boolean,
+  },
   data(){
     return {
       timerStartTime: 30,
