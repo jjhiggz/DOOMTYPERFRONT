@@ -1,8 +1,6 @@
 <template>
-    <div class = "tbd" v-if="timerRendered">
-      <div
-        class="property nes-container"
-      >
+    <div v-bind:class="{'ten-sec': this.tenSecsLeft}" v-if="timerRendered">
+      <div class="property nes-container">
         <p>{{timeLeft}}</p>
       </div>
       <button class='tbd' @click="startGame">
@@ -45,6 +43,12 @@ export default {
   computed: {
     gameActive: function(){
       return ( this.interval ? true : false )
+    },
+    tenSecsLeft: function(){
+      return (this.timeLeft <= 10 ? true : false)
+    },
+    oddNumberCurrentTime: function(){
+      return (this.timeLeft%2 !== 0 ? true : false )
     }
   }
   
@@ -57,7 +61,13 @@ export default {
   border-color: red;
   }
   .property{
-    color:green;
     font-size: 4em;
+  }
+  .ten-sec p{
+    color:red;
+    transform:scale(1.3)
+  }
+  p{
+    color:green;
   }
 </style>
