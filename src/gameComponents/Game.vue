@@ -1,7 +1,7 @@
 <template>
 <div id='game'>
 
-  <div class="game-container nes-container" v-if="gameRendered">
+  <div class="game-container nes-container" v-if="render">
     <div class="input-wrapper">
       <div class="test-input-group">
           <span
@@ -11,16 +11,12 @@
           >
           {{input}}
         </span>
-        <span class="test-word">fuck1</span>
-        <span class="test-word">fuck2</span>
-        <span class="test-word">fuck3</span>
-        <span class="test-word">fuck4</span>
-        <span class="test-word">fuck5</span>
-
-        <span class="test-word">fuck6</span>
-        <span class="test-word">fuck7</span>
-        <span class="test-word">fuck8</span>
-        <span class="test-word">fuck9</span>
+        <!-- below will need a v-for directive to populatee the right witht he incomplete words -->
+        <span 
+          class="test-word"
+        >
+          fuck1
+        </span>
       </div>
     </div>
 
@@ -50,6 +46,7 @@
     id='test-iniput'
     type='text'
     v-model="input"
+    @input="handleInputChange"
   >
 </div>
 </template>
@@ -58,14 +55,44 @@
 export default {
   name: 'Game',
   props: {
-    gameRendered: Boolean,
+    render:{
+      type:Object,
+    },
+    gameProps:{
+      type:Object,
+    }
+  },
+  updated(){
+    this.$nextTick(function(){
+      
+    })
   },
   data(){
     return(
       {
-        input: ''
+      testWords:[],
+      completeWords:[],
+      currentWord:'',
+      input: '',
+      lastCharacter: '',
       }
     )
+  },
+  methods:{
+    handleInputChange(){
+      this.input = event.target.value
+      this.lastCharacter = this.input.substr(-1)
+      this.isSpace(this.lastCharacter) ? this.handleSpace() : this.handleCharacter()
+    },
+    isSpace(character){
+      return character === ' ' ? true : false
+    },
+    handleSpace(){
+      this.input = ''
+    },
+    handleCharacter(){
+
+    }
   }
 }
 </script>

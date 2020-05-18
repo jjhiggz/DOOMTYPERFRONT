@@ -1,7 +1,7 @@
 <template>
   <div
     class="nav-bar"
-    v-if='gameNavRendered'
+    v-if='render'
   >
     <p class="navbar-header">Welcome {name} select an option</p>
     <ul class="nes-lists" > 
@@ -9,7 +9,7 @@
         class='menu-item'
         @click="setSelectedItem('Select a game')"
       >
-        <span class="scary">†</span> 
+        <span v-on:updateGameName="updateGameName($event)" class="scary">†</span> 
         Select a Game
         <span class="scary">†</span> 
       </li>
@@ -44,11 +44,13 @@
 <script>
 export default {
   props: {
-    gameNavRendered:Boolean,
+    render:Object,
   },
   data: function(){
     return {
     selectedItem: '',
+    words:[],
+    topic:'',
     }
   },
   methods: {
@@ -56,6 +58,9 @@ export default {
       console.log(string)
       this.selectedItem = string
     },
+    updateGameName: function(){
+      console.log('f')
+    }
   }
 }
 </script>

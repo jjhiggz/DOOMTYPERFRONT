@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="{'ten-sec': this.tenSecsLeft}" v-if="timerRendered">
+    <div v-bind:class="{'ten-sec': this.tenSecsLeft}" v-if="renders.timerRendered">
       <div class="property nes-container">
         <p>{{timeLeft}}</p>
       </div>
@@ -14,7 +14,9 @@
 export default {
   name:'Timer',
     props: {
-    timerRendered: Boolean,
+      renders: {
+        type:Object
+      }
   },
   data(){
     return {
@@ -29,7 +31,8 @@ export default {
       this.timeLeft === 0 && (
         clearInterval(this.interval),
         this.interval = undefined,
-        this.timeLeft = this.timerStartTime
+        this.timeLeft = this.timerStartTime,
+        this.$emit('endGame')
       )
     },
     startGame: function(){
@@ -38,6 +41,7 @@ export default {
           this.decrementTimeLeft
         , 1000)
       }
+      this.$emit('startGame')
     },
   },
   computed: {

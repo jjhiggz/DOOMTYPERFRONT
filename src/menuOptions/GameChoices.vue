@@ -1,47 +1,10 @@
 <template>
-  <div class="nes-container game-choice-container with-title is-centered id-dark" v-if="gameChoicesRendered">
+  <div class="nes-container game-choice-container with-title is-centered id-dark" v-if="render">
       <p class="title" id="title">CHOOSE YOUR FATE</p>
       <nav id='mylist' class="list nes-list is-circle">
-        <p class="game-name">game1</p>
-        <p class="game-name">game2</p>
-        <p class="game-name">game3</p>
-        <p class="game-name">game4</p>
-        <p class="game-name">game5</p>
-        <p class="game-name">game6</p>
-        <p class="game-name">game7</p>
-        <p class="game-name">game8</p>
-        <p class="game-name">game9</p>
-        <p class="game-name">game10</p>
-        <p class="game-name">game11</p>
-        <p class="game-name">game12</p>
-        <p class="game-name">game13</p>
-        <p class="game-name">game14</p>
-        <p class="game-name">game15</p>
-        <p class="game-name">game16</p>
-        <p class="game-name">game17</p>
-        <p class="game-name">game18</p>
-        <p class="game-name">game19</p>
-        <p class="game-name">game20</p>
-        <p class="game-name">game1</p>
-        <p class="game-name">game2</p>
-        <p class="game-name">game3</p>
-        <p class="game-name">game4</p>
-        <p class="game-name">game5</p>
-        <p class="game-name">game6</p>
-        <p class="game-name">game7</p>
-        <p class="game-name">game8</p>
-        <p class="game-name">game9</p>
-        <p class="game-name">game10</p>
-        <p class="game-name">game11</p>
-        <p class="game-name">game12</p>
-        <p class="game-name">game13</p>
-        <p class="game-name">game14</p>
-        <p class="game-name">game15</p>
-        <p class="game-name">game16</p>
-        <p class="game-name">game17</p>
-        <p class="game-name">game18</p>
-        <p class="game-name">game19</p>
-        <p class="game-name">game20</p>
+        <p :key="game" v-for="game in games" class="game-name" @click='handleClick($event, game)'>
+          {{game.name}}
+        </p> 
       </nav>
   </div>
 </template>
@@ -50,7 +13,31 @@
 export default {
   name:"GameChoices",
   props:{
-    gameChoicesRendered: Boolean,
+    render: {
+      type:Object
+    },
+    games: {
+      type:Array
+    }
+  },
+
+  data(){
+    return {
+      gameOptions:[],
+    }
+  },
+  methods: {
+    handleClick: function(event, game){
+      this.$emit('selectGame', game)
+    },
+    updateGame: function(game){
+      this.gameProps.gameName =  game.name
+      this.extractWords(game.words)
+    },
+    extractWords: function(jsonWords){
+      const words = JSON.parse(jsonWords)
+      this.gameProps.words = words
+    },
   }
 }
 </script>

@@ -1,7 +1,9 @@
 <template>
-  <div class="nes-container" v-if="titleRendered">
-    <img class='logo-left' src='https://fontmeme.com/permalink/200512/4d1552af6c506fd05f5d823e5fecc3c1.png'>
-    <img class='logo-right' src='https://fontmeme.com/permalink/200512/0ae7eb099280ce7eccf2997b22cdf27b.png'>
+  <div class="nes-container" v-if="render">
+    <span class='logo'>
+      <img class='logo-left' src='https://fontmeme.com/permalink/200512/4d1552af6c506fd05f5d823e5fecc3c1.png'>
+      <img class='logo-right' src='https://fontmeme.com/permalink/200512/0ae7eb099280ce7eccf2997b22cdf27b.png'>
+    </span>
     <h3 id='motto'>for your fight to 150wpm is eternal</h3>
   </div>
 </template>
@@ -9,7 +11,7 @@
 <script>
 export default {
   props: {
-    titleRendered: Boolean,
+    render: Object,
   }
 }
 </script>
@@ -36,7 +38,22 @@ export default {
     transform:scale(200%);
     background-color:black; 
   }
-  .logo-left{
+  .logo-left, .logo-right, #motto{
     padding-right:20px;
+    animation: pulse1 5s infinite;
   }
+  .logo{
+    animation: pulse 5s infinite;
+  }
+
+  @keyframes pulse1{
+    0% {
+      transform:scale(1)
+    }
+    50% {
+      transform:scale(1.04)
+    }
+  }
+
+
 </style>

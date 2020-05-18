@@ -1,7 +1,7 @@
 <template>
   <div
     class="nes-container is-centered"
-    v-if="signInRendered"
+    v-if="render"
   >
     <p class="title black-title-background">Please enter your information</p>
     <form class="nes-field is-inline">
@@ -52,7 +52,7 @@ export default {
   name: 'SignIn',
   props: {
     msg: String,
-    signInRendered:Boolean,
+    render:Object,
   },
   validations: {
     userInput: {required, maxLength: maxLength(10) },
